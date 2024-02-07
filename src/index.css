@@ -13,12 +13,14 @@ body {
     background-color: #01257d;
     margin: 0;
     box-sizing: border-box;
+    color: #ffffff;
 }
 
 a {
     text-decoration: none;
     display: block;
-    color: #000000;
+    /* color: #000000; */
+    color: #ffffff;
 }
 
 button {
@@ -42,6 +44,12 @@ button {
     padding: 0 3rem;
     font-size: 1rem;
 }
+
+.passwordInput::placeholder,
+.emailInput::placeholder {
+    padding-left: 10px;
+}
+
 @media (min-width: 1100px) {
     .input,
     .passwordInput,
@@ -49,6 +57,7 @@ button {
     .nameInput,
     .textarea {
         padding: 0 5rem;
+        width: 60%;
     }
 }
 
@@ -146,7 +155,8 @@ button {
     bottom: 0;
     right: 0;
     height: 85px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color: #00abe4;
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -174,15 +184,26 @@ button {
     align-items: center;
 }
 
-.navbarListItemName,
-.navbarListItemNameActive {
-    margin-top: 0.25rem;
-    font-size: 14px;
-    font-weight: 600;
-    color: #8f8f8f;
+.navbarListItem img {
+    width: 40px;
+    height: 40px;
 }
-.navbarListItemNameActive {
-    color: #2c2c2c;
+
+.links {
+    color: #ffffff;
+}
+
+.navbarListItemName {
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    transition: color 0.5s ease-in;
+}
+
+.navbarListItemName:hover {
+    color: #00cc66;
 }
 
 .nameInput {
@@ -235,6 +256,16 @@ button {
     cursor: pointer;
 }
 @media (min-width: 1024px) {
+    .showPassword {
+        top: -4%;
+        right: 40%;
+    }
+
+    .forgotPasswordLink {
+        text-align: center;
+        margin-left: 150px;
+    }
+
     .signInBar,
     .signUpBar {
         justify-content: start;
@@ -289,7 +320,8 @@ button {
     width: 100%;
 }
 
-.registerLink {
+.registerLink,
+.signupLink {
     margin-top: 4rem;
     color: #00cc66;
     font-weight: 600;
@@ -355,7 +387,8 @@ button {
 }
 
 .swiperSlidePrice {
-    color: #000000;
+    /* color: #000000; */
+    color: #ffffff;
     position: absolute;
     top: 143px;
     left: 11px;
