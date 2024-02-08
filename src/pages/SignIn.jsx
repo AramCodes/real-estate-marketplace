@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import arrowRightIcon from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 
@@ -18,13 +20,32 @@ const SignIn = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const auth = getAuth();
+
+            const userCredentials = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            if (userCredentials.user) {
+                navigate("/");
+            }
+        } catch (error) {
+            toast.error("Invalid Credentials");
+        }
+    };
     return (
         <>
             <div className="pageContainer">
                 <header>
                     <p className="pageHeader">Welcome Back!</p>
                 </header>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input
                         type="email"
                         className="emailInput"
@@ -33,6 +54,7 @@ const SignIn = () => {
                         value={email}
                         onChange={handleChange}
                         name="email"
+                        required
                     />
                     <div className="passwordInputDiv">
                         <input
@@ -43,6 +65,7 @@ const SignIn = () => {
                             value={password}
                             onChange={handleChange}
                             name="password"
+                            required
                         />
 
                         <img

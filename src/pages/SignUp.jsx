@@ -2,6 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import arrowRightIcon from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile,
+} from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase.config";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -19,13 +27,43 @@ const SignUp = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const auth = getAuth();
+
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            const user = userCredential.user;
+
+            updateProfile(auth.currentUser, {
+                displayName: name,
+            });
+
+            const formDataCopy = { ...formData };
+            delete formDataCopy.password;
+            formDataCopy.timestamp = serverTimestamp();
+
+            await setDoc(doc(db, "users", user.uid), formDataCopy);
+
+            navigate("/");
+        } catch (error) {
+            toast.error("Failed to Sign Up");
+        }
+    };
+
     return (
         <>
             <div className="pageContainer">
                 <header>
                     <p className="pageHeader">Welcome Back!</p>
                 </header>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         className="nameInput"
@@ -34,6 +72,7 @@ const SignUp = () => {
                         value={name}
                         onChange={handleChange}
                         name="name"
+                        required
                     />
                     <input
                         type="email"
@@ -43,6 +82,7 @@ const SignUp = () => {
                         value={email}
                         onChange={handleChange}
                         name="email"
+                        required
                     />
                     <div className="passwordInputDiv">
                         <input
@@ -53,6 +93,7 @@ const SignUp = () => {
                             value={password}
                             onChange={handleChange}
                             name="password"
+                            required
                         />
 
                         <img
