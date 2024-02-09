@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import arrowRightIcon from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -76,6 +77,10 @@ const SignIn = () => {
                         />
                     </div>
 
+                    <Link to="/forgot-password" className="forgotPasswordLink">
+                        Forgot Password
+                    </Link>
+
                     <div className="signInBar">
                         <p className="signInText">Sign In</p>
 
@@ -84,6 +89,8 @@ const SignIn = () => {
                         </button>
                     </div>
                 </form>
+
+                <OAuth />
 
                 <Link to="/signUp" className="registerLink">
                     Sign Up Instead
