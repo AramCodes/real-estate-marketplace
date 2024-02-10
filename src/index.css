@@ -414,7 +414,7 @@ button {
 
 .exploreCategoryImg {
     min-height: 115px;
-    height: 15vw;
+    height: 20vw;
     width: 100%;
     border-radius: 1.5rem;
     object-fit: cover;
