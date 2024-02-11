@@ -342,6 +342,7 @@ button {
 
 .exploreHeading,
 .exploreCategoryHeading {
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
@@ -422,6 +423,7 @@ button {
 }
 
 .exploreCategoryName {
+    font-size: 1.2rem;
     font-weight: 500;
     text-align: left;
 }
@@ -499,7 +501,7 @@ button {
 
 .categoryListingInfoText {
     font-weight: 500;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 
 .loadMore {
