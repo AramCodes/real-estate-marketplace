@@ -293,6 +293,11 @@ button {
     .signUpButton {
         margin-left: 3rem;
     }
+
+    .formInputFile {
+        color: #000000;
+        padding: 1rem;
+    }
 }
 
 .socialLogin {
@@ -595,6 +600,11 @@ button {
     .leafletContainer {
         height: 400px;
     }
+
+    .createListingButton {
+        margin-top: 3rem;
+        width: 30%;
+    }
 }
 
 .linkCopied {
@@ -737,6 +747,7 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #000000;
 }
 
 .listingText {
@@ -775,9 +786,18 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+.formButton:hover {
+    cursor: pointer;
+}
+
 .formButtonActive {
     background-color: #00cc66;
     color: #ffffff;
+}
+
+.formButtonActive:hover {
+    cursor: pointer;
 }
 
 .flex {
@@ -830,6 +850,7 @@ button {
 .formInputFile {
     width: 100%;
 }
+
 .formInputFile::-webkit-file-upload-button {
     background-color: #00cc66;
     border: none;
@@ -842,6 +863,10 @@ button {
 
 .createListingButton {
     margin-top: 5rem;
+}
+
+#listings-paragraph {
+    color: #000000;
 }
 
 .offers {

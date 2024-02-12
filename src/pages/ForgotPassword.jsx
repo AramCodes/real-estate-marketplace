@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
-import ArrowRightIcon from "../assets/svg/keyboardArrowRightIcon.svg";
+import ArrowRightIcon from "../assets/svg/keyboardArrowRightIcons.svg";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
