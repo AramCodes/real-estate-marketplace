@@ -10,6 +10,7 @@ html::-webkit-scrollbar {
 body {
     font-family: "Montserrat", sans-serif;
     /* background-color: #f2f4f8; */
+    user-select: none;
     background-color: #01257d;
     margin: 0;
     box-sizing: border-box;
@@ -544,13 +545,14 @@ button {
 
 .listingName {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 0.5rem;
 }
 
 .listingLocation {
     margin-top: 0;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .discountPrice {
@@ -558,7 +560,7 @@ button {
     background-color: #000000;
     color: #ffffff;
     border-radius: 1rem;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: 600;
     display: inline;
 }
@@ -570,8 +572,9 @@ button {
     border-radius: 2rem;
     display: inline;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     margin-right: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .listingDetailsList {
@@ -579,6 +582,7 @@ button {
     list-style-type: none;
 }
 .listingDetailsList li {
+    font-size: 1.05rem;
     margin: 0.3rem 0;
     font-weight: 500;
     opacity: 0.8;
@@ -587,7 +591,7 @@ button {
 .listingLocationTitle {
     margin-top: 2rem;
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
 .leafletContainer {
@@ -608,6 +612,7 @@ button {
 }
 
 .linkCopied {
+    color: #000000;
     position: fixed;
     top: 9%;
     right: 5%;
@@ -652,6 +657,7 @@ button {
 }
 
 .messageLabel {
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
 }
 
@@ -881,4 +887,12 @@ button {
     margin-left: 1rem;
     font-size: 0.8rem;
     opacity: 0.75;
+}
+
+.left {
+    float: left;
+}
+.listingCoordinats {
+    font-size: 1.1rem;
+    font-weight: 500;
 }
