@@ -46,6 +46,10 @@ const ExploreSlider = () => {
         return <Spinner />;
     }
 
+    if (listings.length === 0) {
+        return <></>;
+    }
+
     return (
         listings && (
             <Carousel
@@ -59,7 +63,15 @@ const ExploreSlider = () => {
                 }
             >
                 {listings?.map((listing, idx) => (
-                    <Carousel.Item key={listing.id} interval={5000}>
+                    <Carousel.Item
+                        key={listing.id}
+                        interval={5000}
+                        onClick={() =>
+                            navigate(
+                                `/category/${listing.data.type}/${listing.id}`
+                            )
+                        }
+                    >
                         <img
                             style={{ height: "50vh" }}
                             className="d-block w-100"

@@ -6,22 +6,16 @@ import {
     uploadBytesResumable,
     getDownloadURL,
 } from "firebase/storage";
-import {
-    doc,
-    updateDoc,
-    getDoc,
-    addDoc,
-    collection,
-    serverTimestamp,
-} from "firebase/firestore";
+import { doc, updateDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 
 const EditListing = () => {
     const [geoLocationEnabled, setGeoLocationEnabled] = useState(false);
+    const [listing, setListing] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -58,9 +52,39 @@ const EditListing = () => {
     const apiKey = "nunya bizness bih";
 
     const auth = getAuth();
+    const params = useParams();
     const navigate = useNavigate();
     const isMounted = useRef(true);
 
+    //error handling in case listing is not user's
+    useEffect(() => {
+        if (listing && listing.userRef == !auth.currentUser.uid) {
+            toast.error("You are not authorized to edit this listing");
+            navigate("/");
+        }
+    }, []);
+
+    // fetches listing
+    useEffect(() => {
+        setIsLoading(true);
+        const fetchListing = async () => {
+            const docRef = doc(db, "listings", params.listingId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                setListing(docSnap.data());
+                setFormData({ ...docSnap.data() });
+                setIsLoading(false);
+            } else {
+                navigate("/");
+                toast.error("listing does not exist");
+            }
+        };
+
+        fetchListing();
+    }, [params.listingId, navigate]);
+
+    // sets id to logged in user
     useEffect(() => {
         if (isMounted) {
             onAuthStateChanged(auth, (user) => {
@@ -212,7 +236,8 @@ const EditListing = () => {
         delete formDataCopy.images;
         !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
-        const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+        const docRef = doc(db, "listings", params.listingId);
+        await updateDoc(docRef, formDataCopy);
         setIsLoading(false);
         toast.success("Listing saved");
         // console.log(docRef.id);
@@ -226,12 +251,14 @@ const EditListing = () => {
     return (
         <div className="profile">
             <header>
-                <p className="pageHeader">{`Edit $ Listing`}</p>
+                <p className="pageHeader">{`Edit ${listing?.name} Listing`}</p>
             </header>
 
             <main>
                 <form onSubmit={onSubmit}>
-                    <label className="formLabel">Sell / Rent</label>
+                    <label className="formLabel" htmlFor="type">
+                        Sell / Rent
+                    </label>
                     <div className="formButtons">
                         <button
                             type="button"
@@ -262,7 +289,9 @@ const EditListing = () => {
                         </button>
                     </div>
 
-                    <label className="formLabel">Name</label>
+                    <label className="formLabel" htmlFor="name">
+                        Name
+                    </label>
                     <input
                         className="formInputName"
                         type="text"
@@ -272,11 +301,14 @@ const EditListing = () => {
                         maxLength="40"
                         minLength="10"
                         required
+                        autoComplete="true"
                     />
 
                     <div className="formRooms flex">
                         <div>
-                            <label className="formLabel">Bedrooms</label>
+                            <label className="formLabel" htmlFor="bedrooms">
+                                Bedrooms
+                            </label>
                             <input
                                 className="formInputSmall"
                                 type="number"
@@ -289,7 +321,9 @@ const EditListing = () => {
                             />
                         </div>
                         <div>
-                            <label className="formLabel">Bathrooms</label>
+                            <label className="formLabel" htmlFor="bathrooms">
+                                Bathrooms
+                            </label>
                             <input
                                 className="formInputSmall"
                                 type="number"
@@ -303,7 +337,9 @@ const EditListing = () => {
                         </div>
                     </div>
 
-                    <label className="formLabel">Parking spot</label>
+                    <label className="formLabel" htmlFor="parking">
+                        Parking spot
+                    </label>
                     <div className="formButtons">
                         <button
                             className={
@@ -333,7 +369,9 @@ const EditListing = () => {
                         </button>
                     </div>
 
-                    <label className="formLabel">Furnished</label>
+                    <label className="formLabel" htmlFor="furnished">
+                        Furnished
+                    </label>
                     <div className="formButtons">
                         <button
                             className={
@@ -361,7 +399,9 @@ const EditListing = () => {
                         </button>
                     </div>
 
-                    <label className="formLabel">Address</label>
+                    <label className="formLabel" htmlFor="location">
+                        Address
+                    </label>
                     <textarea
                         className="formInputAddress"
                         type="text"
@@ -374,7 +414,9 @@ const EditListing = () => {
                     {!geoLocationEnabled && (
                         <div className="formLatLng flex">
                             <div>
-                                <label className="formLabel">Latitude</label>
+                                <label className="formLabel" htmlFor="latitude">
+                                    Latitude
+                                </label>
                                 <input
                                     className="formInputSmall"
                                     type="number"
@@ -385,7 +427,12 @@ const EditListing = () => {
                                 />
                             </div>
                             <div>
-                                <label className="formLabel">Longitude</label>
+                                <label
+                                    className="formLabel"
+                                    htmlFor="longitude"
+                                >
+                                    Longitude
+                                </label>
                                 <input
                                     className="formInputSmall"
                                     type="number"
@@ -398,7 +445,9 @@ const EditListing = () => {
                         </div>
                     )}
 
-                    <label className="formLabel">Offer</label>
+                    <label className="formLabel" htmlFor="offer">
+                        Offer
+                    </label>
                     <div className="formButtons">
                         <button
                             className={
@@ -426,7 +475,9 @@ const EditListing = () => {
                         </button>
                     </div>
 
-                    <label className="formLabel">Regular Price</label>
+                    <label className="formLabel" htmlFor="regularPrice">
+                        Regular Price
+                    </label>
                     <div className="formPriceDiv">
                         <input
                             className="formInputSmall"
@@ -445,7 +496,10 @@ const EditListing = () => {
 
                     {offer && (
                         <>
-                            <label className="formLabel">
+                            <label
+                                className="formLabel"
+                                htmlFor="discountedPrice"
+                            >
                                 Discounted Price
                             </label>
                             <input
@@ -461,7 +515,9 @@ const EditListing = () => {
                         </>
                     )}
 
-                    <label className="formLabel">Images</label>
+                    <label className="formLabel" htmlFor="images">
+                        Images
+                    </label>
                     <p className="imagesInfo">
                         The first image will be the cover ( hold Ctrl/Cmd to
                         select multiple files, max 6 ).
