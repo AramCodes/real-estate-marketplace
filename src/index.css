@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap");
 * {
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 html::-webkit-scrollbar {
@@ -8,20 +8,20 @@ html::-webkit-scrollbar {
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif !important;
     /* background-color: #f2f4f8; */
     user-select: none;
-    background-color: #01257d;
-    margin: 0;
-    box-sizing: border-box;
-    color: #ffffff;
+    background-color: #01257d !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    color: #ffffff !important;
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     display: block;
     /* color: #000000; */
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 button {
@@ -88,12 +88,26 @@ button {
     position: absolute;
     top: -3%;
     right: -2%;
+    margin-right: 10px;
 }
 .editIcon {
     cursor: pointer;
     position: absolute;
     top: -3.4%;
     right: 20px;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 1500px) {
+    .editIcon {
+        transform: scale(1.5);
+        margin-right: 15px;
+    }
+
+    .removeIcon {
+        transform: scale(1.5);
+        margin-right: 30px;
+    }
 }
 
 .pageContainer,
@@ -102,7 +116,7 @@ button {
 .listingDetails,
 .category,
 .explore {
-    margin: 1rem;
+    margin: 0;
 }
 @media (min-width: 1024px) {
     .pageContainer,
@@ -129,8 +143,8 @@ button {
 }
 
 .loadingSpinner {
-    width: 64px;
-    height: 64px;
+    width: 100px;
+    height: 100px;
     border: 8px solid;
     border-color: #00cc66 transparent #00cc66 transparent;
     border-radius: 50%;
@@ -146,12 +160,12 @@ button {
 }
 
 .pageHeader {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
 }
 
 .navbar {
-    position: fixed;
+    position: fixed !important;
     left: 0;
     bottom: 0;
     right: 0;
@@ -173,16 +187,16 @@ button {
 .navbarListItems {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    display: flex !important;
+    justify-content: space-evenly !important;
+    align-items: center !important;
 }
 
 .navbarListItem {
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
 .navbarListItem img {
@@ -271,12 +285,16 @@ button {
     .signUpBar {
         justify-content: start;
     }
+
+    .loadMore {
+        margin-top: -350px;
+    }
 }
 
 .signInText,
 .signUpText {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
 }
 
 .signInButton,
@@ -337,84 +355,30 @@ button {
 
 @media (min-width: 1217px) {
     .explore {
-        margin-bottom: 10rem;
+        margin-bottom: 15rem !important;
     }
 }
 @media (max-height: 536) {
     .explore {
-        margin-bottom: 10rem;
+        margin-bottom: 10rem !important;
     }
 }
 
 .exploreHeading,
 .exploreCategoryHeading {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
 }
 
 .exploreCategoryHeading {
     margin-top: 3rem;
 }
 
-.swiper-container {
-    min-height: 225px;
-    height: 23vw;
-}
-
-.swiper-pagination-bullet-active {
-    background-color: #ffffff !important;
-}
-
-.swiperSlideDiv {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.swiperSlideImg {
-    width: 100%;
-    object-fit: cover;
-}
-
-.swiperSlideText {
-    color: #ffffff;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    font-weight: 600;
-    max-width: 90%;
-    font-size: 1.25rem;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 0.5rem;
-}
-@media (min-width: 1024px) {
-    .swiperSlideText {
-        font-size: 1.75rem;
-    }
-}
-
-.swiperSlidePrice {
-    /* color: #000000; */
-    color: #ffffff;
-    position: absolute;
-    top: 143px;
-    left: 11px;
-    font-weight: 600;
-    max-width: 90%;
-    background-color: #ffffff;
-    padding: 0.25rem 0.5rem;
-    border-radius: 1rem;
-}
-@media (min-width: 1024px) {
-    .swiperSlidePrice {
-        font-size: 1.25rem;
-    }
-}
-
 .exploreCategories {
     display: flex;
     justify-content: space-between;
 }
+
 .exploreCategories a {
     width: 48%;
 }
@@ -429,17 +393,18 @@ button {
 }
 
 .exploreCategoryName {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 500;
     text-align: left;
 }
 
 .category {
-    margin-bottom: 10rem;
+    height: 110vh !important;
 }
 
 .categoryListings {
     padding: 0;
+    margin-bottom: 10rem;
 }
 
 .categoryListing {
@@ -463,7 +428,7 @@ button {
 @media (min-width: 1024px) {
     .categoryListingImg {
         width: 19%;
-        height: 217px;
+        height: 215px;
     }
 }
 
@@ -511,6 +476,7 @@ button {
 }
 
 .loadMore {
+    display: block;
     cursor: pointer;
     width: 8rem;
     margin: 0 auto;
@@ -521,7 +487,7 @@ button {
     font-weight: 600;
     border-radius: 1rem;
     opacity: 0.7;
-    margin-top: 2rem;
+    margin-top: -100px;
 }
 
 .listingDetails {
@@ -662,7 +628,7 @@ button {
 }
 
 .profile {
-    margin-bottom: 10rem;
+    margin-bottom: 15rem !important;
 }
 
 .profileHeader {
@@ -876,7 +842,7 @@ button {
 }
 
 .offers {
-    margin-bottom: 10rem;
+    margin-bottom: 10rem !important;
 }
 
 .offerBadge {
@@ -887,12 +853,70 @@ button {
     margin-left: 1rem;
     font-size: 0.8rem;
     opacity: 0.75;
+    margin-bottom: 16px !important;
 }
 
 .left {
     float: left;
 }
-.listingCoordinats {
+.listingCoordinates {
     font-size: 1.1rem;
     font-weight: 500;
+    margin-top: 15px;
+}
+
+.slider-container {
+    width: 100%;
+    height: 55vh;
+    margin-bottom: 50px !important;
+}
+
+.listingImg {
+    display: block;
+    width: 100%;
+    height: 55h;
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto;
+}
+
+.swiperSlideText {
+    color: #ffffff;
+    font-weight: 600;
+    max-width: 40%;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.5rem;
+    margin: 0 auto;
+}
+
+.swiperSlidePrice {
+    color: #000000;
+    font-weight: 600;
+    max-width: 35%;
+    background-color: #ffffff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    margin: 20px auto;
+}
+
+@media (min-width: 1024px) {
+    .swiperSlideText {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .swiperSlidePrice {
+        font-size: 1.25rem;
+    }
+}
+
+.carousel button.active {
+    background-color: #00cc66 !important;
+}
+
+span.carousel-control-next-icon,
+span.carousel-control-prev-icon {
+    transform: scale(2.5) !important;
 }

@@ -6,6 +6,7 @@ import { db } from "../firebase.config";
 import Spinner from "../components/Spinner";
 import shareIcon from "../assets/svg/shareIcon.svg";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import ListingSlider from "../components/ListingSlider";
 
 const Listing = () => {
     const [listing, setListing] = useState(null);
@@ -36,7 +37,7 @@ const Listing = () => {
 
     return (
         <main>
-            {/* SLIDER */}
+            <ListingSlider listing={listing} />
 
             <div
                 className="shareIconDiv"
@@ -70,14 +71,14 @@ const Listing = () => {
                 </p>
                 {listing.offer && (
                     <p className="discountPrice">
-                        $
+                        ${" "}
                         {(listing.regularPrice - listing.discountedPrice)
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
                         discount
                     </p>
                 )}
-                <p className="listingCoordinats">{`Latitude : ${listing.geolocation.lat} & Longitude : ${listing.geolocation.lng}`}</p>
+                <p className="listingCoordinates">{`Latitude : ${listing.geolocation.lat} & Longitude : ${listing.geolocation.lng}`}</p>
 
                 <ul className="listingDetailsList">
                     <li>
